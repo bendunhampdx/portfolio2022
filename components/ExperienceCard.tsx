@@ -1,11 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Experience } from "../typings";
+import { urlFor } from "../sanity";
 
-type Props = {};
+type Props = {
+  experience: Experience;
+};
 
-function ExperienceCard({}: Props) {
+function ExperienceCard({ experience }: Props) {
   return (
-    <article className='flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:w-[900px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 cursor-pointer transition-opacity duration-200 overflow-hidden'>
+    <article className='flex flex-col rounded-lg items-center space-y-7 flex-shrink-0 w-[500px] md:w-[600px] xl:w-[900px] snap-center bg-[#292929] p-10 hover:opacity-100 opacity-40 transition-opacity duration-200 overflow-hidden'>
       <motion.img
         initial={{
           y: -100,
@@ -15,7 +19,7 @@ function ExperienceCard({}: Props) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className='w-32 h-32 rounded-full xl:w-[200px] xl:h-[200px] object-cover object-center'
-        src='https://theoremadvertising.com/wp-content/uploads/2021/01/cropped-Favicon-Pink-1.png'
+        src={urlFor(experience?.companyImage).url()}
         alt=''
       />
 
@@ -24,30 +28,26 @@ function ExperienceCard({}: Props) {
         <p className='font-bold text-2xl mt-1'>THEO</p>
       </div>
       <div className='flex space-x-2 my-2'>
-        <img
-          className='h-10 w-10 rounded-full'
-          src='http://code-institute-org.github.io/Full-Stack-Web-Developer-Stream-0/assets/javascript.png'
-          alt=''
-        />
-        <img
-          className='h-10 w-10 rounded-full'
-          src='http://code-institute-org.github.io/Full-Stack-Web-Developer-Stream-0/assets/javascript.png'
-          alt=''
-        />
-        <img
-          className='h-10 w-10 rounded-full'
-          src='http://code-institute-org.github.io/Full-Stack-Web-Developer-Stream-0/assets/javascript.png'
-          alt=''
-        />
+        {experience.technologies.map((technology) => (
+          <img
+            key={technology._id}
+            className='h-10 w-10 rounded-full object-contain'
+            src={urlFor(technology.image).url()}
+            alt=''
+          />
+        ))}
       </div>
-      <p className='uppercase py-5 text-gray-300'>Started work... - Ended...</p>
+      <p className='uppercase py-5 text-gray-300'>
+        {new Date(experience.dateStarted).toDateString()} -
+        {experience.isCurrentlyWorkingHere
+          ? " Present"
+          : new Date(experience.dateEnded).toDateString()}
+      </p>
 
       <ul className='list-disc space-y-4 ml-5 text-lg'>
-        <li>Summary points</li>
-        <li>Summary points</li>
-        <li>Summary points</li>
-        <li>Summary points</li>
-        <li>Summary points</li>
+        {experience.points.map((point, i) => (
+          <li key={i}>{point}</li>
+        ))}
       </ul>
     </article>
   );

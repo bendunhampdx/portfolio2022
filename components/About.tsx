@@ -1,9 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { PageInfo } from "../typings";
+import { urlFor } from "../sanity";
 
-type Props = {};
+type Props = {
+  pageInfo: PageInfo;
+};
 
-export default function About({}: Props) {
+export default function About({ pageInfo }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -28,7 +32,7 @@ export default function About({}: Props) {
           x: 0,
         }}
         viewport={{ once: true }}
-        src='/images/ben3.jpg'
+        src={urlFor(pageInfo?.profilePic).url()}
         className='-mb-20 md:mb-0 flex-shrink-0 w-56 h-65 rounded-full object-cover md:rounded-lg md:w-64 md:h-95 xl:w-[500px] xl:h-[600px]'
       />
 
@@ -38,19 +42,7 @@ export default function About({}: Props) {
           <span className='underline decoration-[#ftab0a]/50'>little</span>{" "}
           background
         </h4>
-        <p className='text-sm'>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni animi
-          rerum reiciendis officia porro voluptatibus eum enim aliquid dolor
-          esse repudiandae vitae cum ipsa repellat, obcaecati accusantium quidem
-          quis repellendus libero, ab possimus eius consequatur illum assumenda?
-          Aut fugit at maiores, sequi modi dolorem adipisci voluptatum laborum
-          labore ipsum quos, laudantium, cum veritatis nulla. Deleniti harum
-          quaerat sequi atque dicta, et voluptates perspiciatis, ad sint odio
-          qui quo autem obcaecati laborum aliquid. Vel dolorem architecto
-          accusamus itaque magni rem, libero atque praesentium alias, est, harum
-          ipsam earum dolorum tempore nisi? Molestias quisquam esse explicabo
-          enim, voluptate nobis neque modi reprehenderit.
-        </p>
+        <p className='text-base'>{pageInfo.backgroundInformation}</p>
       </div>
     </motion.div>
   );
