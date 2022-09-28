@@ -23,7 +23,7 @@ function Hero({ pageInfo }: Props) {
     <div className='h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden'>
       <BackgroundCircles />
       <img
-        className='relative rounded-full h-32 w-32 mx-auto object-cover'
+        className='relative rounded-full h-24 w-24 md:h-32 md:w-32 mx-auto object-cover'
         src={urlFor(pageInfo?.heroImage).url()}
         alt='Picture of Ben Dunham'
       />
@@ -31,7 +31,7 @@ function Hero({ pageInfo }: Props) {
         <h2 className='text-sm uppercase text-gray-500 pb-2 tracking-[15px]'>
           {pageInfo.role}
         </h2>
-        <h1 className='text-5xl lg:text-6xl font-semibold px-10'>
+        <h1 className='text-xl md:text-2xl lg:text-6xl font-semibold px-10'>
           <span className='mr-3'>{text}</span>
           <Cursor cursorColor='#f7AB0A' />
         </h1>

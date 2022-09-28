@@ -60,7 +60,7 @@ function Header({ socials }: Props) {
             bgColor='transparent'
           />
 
-          <p className='uppercase hidden md:inline-flex text-sm text-gray-400'>
+          <p className='uppercase hidden md:inline-flex text-sm text-gray-400 cursor-pointer'>
             get in touch
           </p>
         </motion.div>
